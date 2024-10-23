@@ -418,10 +418,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7412079985589468698}
     - target: {fileID: 8429981633443581383, guid: 6c8af5c8012f01440af6cb2bc3eb987c, type: 3}
-      propertyPath: m_LocomotionVignetteProviders.Array.data[1].m_LocomotionProvider
-      value: 
-      objectReference: {fileID: 73949512329761232}
-    - target: {fileID: 8429981633443581383, guid: 6c8af5c8012f01440af6cb2bc3eb987c, type: 3}
       propertyPath: m_LocomotionVignetteProviders.Array.data[2].m_LocomotionProvider
       value: 
       objectReference: {fileID: 8988371223026793012}
@@ -881,7 +877,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7347985736721345035, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1767192434, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
@@ -904,17 +901,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 905229015085933311}
   m_SourcePrefab: {fileID: 100100000, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
---- !u!114 &73949512329761232 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7347985736721345035, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-  m_PrefabInstance: {fileID: 7277802326999645147}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9f365cf844c03449bc8973eead2c3c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3123834650606846029 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5739245880472075158, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
