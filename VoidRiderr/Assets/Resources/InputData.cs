@@ -14,6 +14,7 @@ public class InputData : MonoBehaviour
     {
         if (!_rightController.isValid || !_leftController.isValid || !_HMD.isValid)
             InitializeInputDevices();
+        Move();
     }
     private void InitializeInputDevices()
     {
@@ -39,6 +40,11 @@ public class InputData : MonoBehaviour
         {
             inputDevice = devices[0];
         }
+    }
+
+    private void Move()
+    {
+        
     }
 
 }
