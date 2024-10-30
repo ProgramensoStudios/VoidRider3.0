@@ -87,7 +87,7 @@ public class DisplayInputData : MonoBehaviour
             if (leftAxis.y >= 0f)
             {
                 relativeFwd = cabinRigidbody.transform.TransformDirection(Vector3.forward);
-                cabinRigidbody.velocity = relativeFwd * speed * leftAxis.y;
+                cabinRigidbody.linearVelocity = relativeFwd * speed * leftAxis.y;
             }
         }
 
