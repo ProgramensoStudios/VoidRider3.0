@@ -11,47 +11,49 @@ public class DisplayInputData : MonoBehaviour
     private InputData _inputData;
     [Header ("Nave Objects")]
     [SerializeField] private GameObject nave;
-    //[SerializeField] private Rigidbody cabinRigidbody;
+    [SerializeField] private Rigidbody cabinRigidbody;
 
     
     [Header ("Speed & Vectors 3")]
     [SerializeField] public float rotSpeed = 0.002f;
     [SerializeField] private Vector3 relativeFwd;
-   // [SerializeField] public float speed;
-   //[SerializeField] public float turboSpeed;
+    [SerializeField] public float speed;
+
+    [SerializeField] private Vector3 testConstraint;
+    //[SerializeField] public float turboSpeed;
     //[SerializeField] public float turboTime;
     //[SerializeField] public float slowmoTime;
 
     //[Header("Turbo")] 
     //[SerializeField] private Turbo turbo;
-   // private Coroutine _corTurbo;
-    
-   // [Header ("SlowMo")]
-   // public Coroutine corSlowmo;
-   // public SlowMoLoader _slowMoClass;
-    
-   // [Header ("Heavy Bullets")]
+    // private Coroutine _corTurbo;
+
+    // [Header ("SlowMo")]
+    // public Coroutine corSlowmo;
+    // public SlowMoLoader _slowMoClass;
+
+    // [Header ("Heavy Bullets")]
     //public BulletLoader bulletClass;
-   // [SerializeField] private GameObject heavyBullet; 
+    // [SerializeField] private GameObject heavyBullet; 
     //[SerializeField] public float rechargeTimer;
     //[SerializeField] public bool canShootLeft2 = true;
-   // [SerializeField] public bool canShootRight2 = true;
+    // [SerializeField] public bool canShootRight2 = true;
     //public BulletLoader bulletLoader;
-    
+
     //[Header("Bullets")]
     //[SerializeField] private GameObject bullet; 
     //[SerializeField] private Transform shootFromRight;
-   // [SerializeField] private Transform shootFromLeft;
+    // [SerializeField] private Transform shootFromLeft;
     //[SerializeField] private bool canShootLeft1 = true;
     //[SerializeField] private bool canShootRight1 = true;
 
     //[Header("PauseManager")] [SerializeField]
     //private HandlePauseUI handlePauseUI;
-   // private IEnumerator _corCanPlay;
+    // private IEnumerator _corCanPlay;
 
     //public bool _canPause;
 
-    
+    Vector3 spinMovement;
     private DisplayInputData _displayInputData;
     //private DisplayInputDataUI _displayDataUI;
    
@@ -70,36 +72,66 @@ public class DisplayInputData : MonoBehaviour
         //Rotation
         if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out var rightAxis))
         {
-            Quaternion spinMovement = new Quaternion(rightAxis.y * rotSpeed * -1, rightAxis.x * rotSpeed, 0, 1);
-            float newXRot = Mathf.Clamp(spinMovement.x, -15, 15);
-            float newYRot = Mathf.Clamp(spinMovement.y, -15, 15);
-            Quaternion newSpinMovement = new Quaternion(newXRot, newYRot, 0, 1);
-            nave.transform.rotation = nave.transform.rotation * newSpinMovement;
+            spinMovement = new Vector3(rightAxis.y * rotSpeed * -1f * Time.deltaTime, rightAxis.x * rotSpeed * Time.deltaTime, 0);
         }
 
         //Movement
 
-        //if (_inputData._leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out var leftAxis))
-        //{
-         //   if (leftAxis.y >= 0f)
-         //   {
-         //       relativeFwd = cabinRigidbody.transform.TransformDirection(Vector3.forward);
-        //        cabinRigidbody.linearVelocity = relativeFwd * speed * leftAxis.y;
-        //    }
-       // }
+        if (_inputData._leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out var leftAxis))
+        {
+            if (leftAxis.y > 0f)
+            {
+                relativeFwd = cabinRigidbody.transform.TransformDirection(Vector3.up);
+                cabinRigidbody.linearVelocity = relativeFwd * speed * leftAxis.y;
+                
+            }
+            if (leftAxis.y < 0f)
+            {
+                relativeFwd = cabinRigidbody.transform.TransformDirection(Vector3.down);
+                cabinRigidbody.linearVelocity = relativeFwd * speed * leftAxis.y;
+            }
+            if (leftAxis.x > 0f)
+            {
+                relativeFwd = cabinRigidbody.transform.TransformDirection(Vector3.right);
+                cabinRigidbody.linearVelocity = relativeFwd * speed * leftAxis.x;
+            }
+            if (leftAxis.x < 0f)
+            {
+                relativeFwd = cabinRigidbody.transform.TransformDirection(Vector3.left);
+                cabinRigidbody.linearVelocity = relativeFwd * speed * -1f * leftAxis.x;
+            }
+            //Debug.Log(leftAxis.y);
+        }
+
+
+        var vector = this.transform.localPosition;
+
+        vector.x =  Mathf.Clamp(vector.x, -testConstraint.x, testConstraint.x);
+        vector.y = Mathf.Clamp(vector.y, -testConstraint.y, testConstraint.y);
+        vector.z = Mathf.Clamp(vector.z, -testConstraint.z, testConstraint.z);
+        this.transform.localPosition = vector;
+
+
+        var newRot = this.transform.localEulerAngles + spinMovement;
+        newRot.x = Mathf.Clamp(newRot.x, -15, 15);
+        newRot.y = Mathf.Clamp(newRot.y, -15, 15);
+        newRot.z = 0;
+        //Debug.Log(newRot);
+        this.transform.localEulerAngles = newRot;
+
 
         //Handle Turbo
-       /* if (_inputData._rightController.TryGetFeatureValue(CommonUsages.deviceRotation, out var rightGiroscope))
-        {
-            if ((rightGiroscope.x > 0) && (_corTurbo == null))
-            {
-                StartCoroutine(Turbo());
-                Debug.Log("turbo");
-                _corTurbo = StartCoroutine(Turbo());
-                // sfx.Play();
-            }
+        /* if (_inputData._rightController.TryGetFeatureValue(CommonUsages.deviceRotation, out var rightGiroscope))
+         {
+             if ((rightGiroscope.x > 0) && (_corTurbo == null))
+             {
+                 StartCoroutine(Turbo());
+                 Debug.Log("turbo");
+                 _corTurbo = StartCoroutine(Turbo());
+                 // sfx.Play();
+             }
 
-        }*/
+         }*/
 
         // Trigger Shoot Handler
 
@@ -149,19 +181,19 @@ public class DisplayInputData : MonoBehaviour
                 corSlowmo = StartCoroutine(SlowMo());
             }
         }*/
-     
-        
+
+
         // Menu
 
-       // if (_inputData._leftController.TryGetFeatureValue(CommonUsages.menuButton, out bool menu))
-       //{
-       //    if (menu)
-       //     {
-       //         _displayInputData.enabled = false;
-       //         //_displayDataUI.enabled = true;
-       //         //handlePauseUI.Pause();
-       //     }
-       // }
+        // if (_inputData._leftController.TryGetFeatureValue(CommonUsages.menuButton, out bool menu))
+        //{
+        //    if (menu)
+        //     {
+        //         _displayInputData.enabled = false;
+        //         //_displayDataUI.enabled = true;
+        //         //handlePauseUI.Pause();
+        //     }
+        // }
 
         //Coroutines
         //IEnumerator SlowMo()
@@ -170,9 +202,9 @@ public class DisplayInputData : MonoBehaviour
         //    Time.timeScale = 0.5f;
         //    yield return new WaitForSeconds(slowmoTime);
         //    Time.timeScale = 1f;
-            //_slowMoClass.LoadSlowMo();
+        //_slowMoClass.LoadSlowMo();
         //}
-        
+
         // Turbo
         //IEnumerator Turbo()
         //{
@@ -181,8 +213,8 @@ public class DisplayInputData : MonoBehaviour
         //    yield return new WaitForSeconds(turboTime);
         //    speed = 50f;
         //   _corTurbo = null;
-           //_slowMoClass.loading = true;
-       // }
+        //_slowMoClass.loading = true;
+        // }
 
         // Shoot
         //IEnumerator ShootRight1()
@@ -192,35 +224,40 @@ public class DisplayInputData : MonoBehaviour
         //    yield return new WaitForSeconds(0.5f);
         //    canShootRight1 = true;
         //}
-        
-       // IEnumerator ShootLeft1()
+
+        // IEnumerator ShootLeft1()
         //{
         //    Instantiate(bullet, shootFromLeft);
         //    canShootLeft1 = false;
-       //     yield return new WaitForSeconds(0.5f);
-       //     canShootLeft1 = true;
-       // }
-        
-       // IEnumerator ShootRight2()
-       // {
-       //     //bulletLoader.circleRight.fillAmount = 0;
-       //     Instantiate(heavyBullet, shootFromRight);
-       //     canShootRight2 = false;
-       //     //bulletLoader.LoadBullet();
-       //     yield return new WaitForSeconds(rechargeTimer);
-       // }
-        
-       /* IEnumerator ShootLeft2()
-        {
-            //bulletLoader.circleLeft.fillAmount = 0;
-            Instantiate(heavyBullet, shootFromLeft);
-            canShootLeft2 = false;
-            //bulletLoader.LoadBullet();
-            yield return new WaitForSeconds(rechargeTimer);
-            
-        }*/
+        //     yield return new WaitForSeconds(0.5f);
+        //     canShootLeft1 = true;
+        // }
 
-     
+        // IEnumerator ShootRight2()
+        // {
+        //     //bulletLoader.circleRight.fillAmount = 0;
+        //     Instantiate(heavyBullet, shootFromRight);
+        //     canShootRight2 = false;
+        //     //bulletLoader.LoadBullet();
+        //     yield return new WaitForSeconds(rechargeTimer);
+        // }
+
+        /* IEnumerator ShootLeft2()
+         {
+             //bulletLoader.circleLeft.fillAmount = 0;
+             Instantiate(heavyBullet, shootFromLeft);
+             canShootLeft2 = false;
+             //bulletLoader.LoadBullet();
+             yield return new WaitForSeconds(rechargeTimer);
+
+         }*/
+
+
     }
-  
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(this.transform.parent.position, testConstraint);
+    }
+
 }
