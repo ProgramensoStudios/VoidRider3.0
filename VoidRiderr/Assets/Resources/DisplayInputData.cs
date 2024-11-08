@@ -77,8 +77,43 @@ public class DisplayInputData : MonoBehaviour
 
         //Movement
 
+        var relativeClamp = new Vector3(0.01f,0.01f,0.01f);
+        relativeFwd.x = Mathf.Clamp(relativeFwd.x ,-relativeClamp.x, relativeClamp.x);
+        relativeFwd.y = Mathf.Clamp(relativeFwd.y ,-relativeClamp.y, relativeClamp.y);
+        relativeFwd.z = Mathf.Clamp(relativeFwd.z ,-relativeClamp.z, relativeClamp.z);
+
         if (_inputData._leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out var leftAxis))
         {
+            
+                if (leftAxis.y > 0f)
+                {
+                    relativeFwd += cabinRigidbody.transform.TransformDirection(Vector3.up);
+                    cabinRigidbody.linearVelocity = relativeFwd * (speed * leftAxis.y);
+                }
+                if (leftAxis.y < 0f)
+                {
+                    relativeFwd += cabinRigidbody.transform.TransformDirection(Vector3.down);
+                    cabinRigidbody.linearVelocity = relativeFwd * (speed * -1f * leftAxis.y);
+                }
+                if (leftAxis.x > 0f)
+                {
+                    relativeFwd += cabinRigidbody.transform.TransformDirection(Vector3.right);
+                    cabinRigidbody.linearVelocity = relativeFwd * (speed * leftAxis.x);
+                }
+                if (leftAxis.x < 0f)
+                {
+                    relativeFwd += cabinRigidbody.transform.TransformDirection(Vector3.left);
+                    cabinRigidbody.linearVelocity = relativeFwd * (speed * -1f * leftAxis.x);
+                }
+
+                if (leftAxis.x == 0f && leftAxis.y == 0f)
+                {
+                    relativeFwd = new Vector3(0f, 0f, 0f);
+                    cabinRigidbody.linearVelocity = relativeFwd * (speed * leftAxis.x);
+                }
+                
+            
+            /*
             if (leftAxis.y > 0f)
             {
                 relativeFwd = cabinRigidbody.transform.TransformDirection(Vector3.up);
@@ -99,7 +134,7 @@ public class DisplayInputData : MonoBehaviour
             {
                 relativeFwd = cabinRigidbody.transform.TransformDirection(Vector3.left);
                 cabinRigidbody.linearVelocity = relativeFwd * speed * -1f * leftAxis.x;
-            }
+            }*/
             //Debug.Log(leftAxis.y);
         }
 
