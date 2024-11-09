@@ -54955,6 +54955,7 @@ MonoBehaviour:
   canShoot: 0
   bulletPool: {fileID: 969085677}
   timeToShoot: 3
+  particleDestroy: {fileID: 0}
   yRot: {fileID: 8137071865361467527}
 --- !u!4 &920871299529159746
 Transform:

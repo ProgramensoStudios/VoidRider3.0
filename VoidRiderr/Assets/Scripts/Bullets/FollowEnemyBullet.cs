@@ -10,7 +10,8 @@ public class FollowEnemyBullet : MonoBehaviour
    [SerializeField] private Transform _target;
    private Enemy _enemy;
 
-   [SerializeField] public int damage;
+   public int damage;
+
    
     
     private Collider[] enemiesInRange = new Collider[10]; 

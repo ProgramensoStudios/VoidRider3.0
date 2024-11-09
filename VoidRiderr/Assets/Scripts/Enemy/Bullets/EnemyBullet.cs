@@ -7,6 +7,7 @@ public class EnemyBullet : MonoBehaviour
     [SerializeField]private Transform originalParent;
     private Vector3 _originalPosition;
     [SerializeField] private float timeToDestroy;
+    public int damage;
     
 
 
