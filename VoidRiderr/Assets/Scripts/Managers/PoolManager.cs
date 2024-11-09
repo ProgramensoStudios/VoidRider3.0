@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,20 +19,34 @@ public class PoolManager : MonoBehaviour
         {
             if (!createdObjects[i].activeInHierarchy)
             {
+                // Primero, configura el parent y la posición
+                createdObjects[i].transform.SetParent(posToSpawn);
                 createdObjects[i].transform.position = posToSpawn.position;
+                createdObjects[i].transform.rotation = posToSpawn.rotation;
+
+                // Luego activa el objeto
                 createdObjects[i].SetActive(true);
-                createdObjects[i].transform.parent = posToSpawn;
                 return createdObjects[i];
             }
         }
-        
+    
         if (createdObjects.Count < maxPoolSize)
         {
-            GameObject createdObject = Instantiate(prefabToCreate, posToSpawn.position, Quaternion.identity);
+            // Primero, crea el objeto y configura su parent y posición
+            GameObject createdObject = Instantiate(prefabToCreate, posToSpawn.position, posToSpawn.rotation);
+            createdObject.transform.SetParent(posToSpawn);
+            StartCoroutine(Wait());
             createdObjects.Add(createdObject);
+            createdObject.SetActive(true);
             return createdObject;
         }
+
         return null;
+    }
+
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.3f);
     }
 
     public void ReturnObject(GameObject obj)

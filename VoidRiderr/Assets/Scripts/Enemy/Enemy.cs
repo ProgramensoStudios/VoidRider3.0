@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
     {
         while (canShoot)
         {
-            bulletPool.AskForObject(gameObject.transform.GetChild(0));
+            bulletPool.AskForObject(gameObject.transform.GetChild(0).GetChild(0));
             yield return new WaitForSeconds(timeToShoot);
         }
     }
