@@ -29,7 +29,7 @@ public class DisplayInputData : MonoBehaviour
     private void Start()
     {
         _inputData = GetComponent<InputData>();
-        bulletPool = FindAnyObjectByType<BulletPool>();
+        //bulletPool = FindAnyObjectByType<BulletPool>();
     }
 
     private void Update()
@@ -74,7 +74,7 @@ public class DisplayInputData : MonoBehaviour
             if (rightTrigger > 0 && _canShoot)
             {
                 _canShoot = false;
-                var currentBullet = BulletPool.Instance.GetBullet();
+                var currentBullet = bulletPool.GetBullet();
                 currentBullet.transform.parent = null;
                 StartCoroutine(ReadyToShoot());
             }
