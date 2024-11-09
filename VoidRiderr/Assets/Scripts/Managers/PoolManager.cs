@@ -14,7 +14,6 @@ public class PoolManager : MonoBehaviour
 
     public GameObject AskForObject(Transform posToSpawn)
     {
-        // Primero intenta buscar un objeto inactivo en el pool.
         for (int i = 0; i < createdObjects.Count; i++)
         {
             if (!createdObjects[i].activeInHierarchy)
@@ -32,15 +31,12 @@ public class PoolManager : MonoBehaviour
             createdObjects.Add(createdObject);
             return createdObject;
         }
-
-        // Si el pool está lleno, retorna null o realiza una acción específica.
-        Debug.LogWarning("Pool máximo alcanzado. No se pueden crear más objetos.");
         return null;
     }
 
     public void ReturnObject(GameObject obj)
     {
         obj.SetActive(false);
-        obj.transform.position = Vector3.zero; // Opcional: reiniciar la posición
+        obj.transform.position = Vector3.zero;
     }
 }

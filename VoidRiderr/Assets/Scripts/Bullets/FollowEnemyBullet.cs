@@ -18,11 +18,13 @@ public class FollowEnemyBullet : MonoBehaviour
     private Collider[] enemiesInRange = new Collider[10]; 
     private SpawnPosReference _spawnRef;
     [SerializeField] private Transform spawnPos;
+    private Transform parent;
 
     private void Awake()
     {
         _spawnRef = FindAnyObjectByType<SpawnPosReference>();
         spawnPos = _spawnRef.transform;
+        parent = transform.parent;
     }
 
     private void Update()
@@ -85,7 +87,7 @@ public class FollowEnemyBullet : MonoBehaviour
     private void OnEnable()
     {
         transform.position = spawnPos.position;
-        transform.rotation = transform.parent.rotation;
+        transform.rotation = parent.parent.rotation;
     }
     
 }

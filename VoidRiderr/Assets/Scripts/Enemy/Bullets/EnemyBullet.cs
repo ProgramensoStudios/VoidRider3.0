@@ -5,28 +5,34 @@ public class EnemyBullet : MonoBehaviour
 {
     public float speed;
     [SerializeField]private Transform originalParent;
-    private Vector3 originalPosition;
+    private Vector3 _originalPosition;
+    [SerializeField] private float timeToDestroy;
+    
+
+
+    private IEnumerator DestroyBullets()
+    {
+        yield return new WaitForSeconds(timeToDestroy);
+        gameObject.SetActive(false);
+    }
 
     private void OnEnable()
     {
-        // Asigna el parent original solo si no se ha establecido previamente
-        if (originalParent == null)
+        if (originalParent != null)return;
         {
             originalParent = transform.parent;
-            originalPosition = transform.localPosition;
+            _originalPosition = transform.localPosition;
         }
-
-        // Restablece la posición y rotación del objeto cuando se activa
         transform.SetParent(originalParent);
         transform.rotation = originalParent.rotation;
-        transform.localPosition = originalPosition;
+        transform.localPosition = _originalPosition;
         
         StartCoroutine(WaitToDetach());
+        StartCoroutine(DestroyBullets());
     }
 
     private void Update()
     {
-        // Movimiento hacia adelante en espacio local
         transform.localPosition += transform.localRotation * Vector3.forward * (speed * Time.deltaTime);
     }
 
