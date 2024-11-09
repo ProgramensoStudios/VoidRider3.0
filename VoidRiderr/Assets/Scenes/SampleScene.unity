@@ -8122,7 +8122,7 @@ MonoBehaviour:
   health: 10
   canShoot: 0
   bulletPool: {fileID: 1834813266}
-  timeToShoot: 1
+  timeToShoot: 1.5
   particleDestroy: {fileID: 160471040847743173, guid: 2e7ccf5bd8778c14cb4fb056ce4c8092, type: 3}
 --- !u!135 &303182546
 SphereCollider:
@@ -17319,7 +17319,7 @@ MonoBehaviour:
   health: 10
   canShoot: 0
   bulletPool: {fileID: 1025058864}
-  timeToShoot: 1
+  timeToShoot: 1.5
   particleDestroy: {fileID: 160471040847743173, guid: 2e7ccf5bd8778c14cb4fb056ce4c8092, type: 3}
 --- !u!135 &622744023
 SphereCollider:
@@ -21760,7 +21760,7 @@ MonoBehaviour:
   health: 10
   canShoot: 0
   bulletPool: {fileID: 1340640273}
-  timeToShoot: 1
+  timeToShoot: 1.5
   particleDestroy: {fileID: 160471040847743173, guid: 2e7ccf5bd8778c14cb4fb056ce4c8092, type: 3}
 --- !u!135 &782055823
 SphereCollider:
@@ -28267,7 +28267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabToCreate: {fileID: 2413519628240867985, guid: e7a78224db213de40aa3dc0b09c4cfa2, type: 3}
-  maxPoolSize: 10
+  maxPoolSize: 15
   createdObjects: []
 --- !u!4 &969794537 stripped
 Transform:
@@ -29130,7 +29130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabToCreate: {fileID: 2413519628240867985, guid: e7a78224db213de40aa3dc0b09c4cfa2, type: 3}
-  maxPoolSize: 10
+  maxPoolSize: 15
   createdObjects: []
 --- !u!1001 &1041946404
 PrefabInstance:
@@ -37170,7 +37170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabToCreate: {fileID: 2413519628240867985, guid: e7a78224db213de40aa3dc0b09c4cfa2, type: 3}
-  maxPoolSize: 10
+  maxPoolSize: 15
   createdObjects: []
 --- !u!1001 &1344122203
 PrefabInstance:
@@ -48408,6 +48408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1771167810}
   - component: {fileID: 1771167811}
+  - component: {fileID: 1771167812}
   m_Layer: 0
   m_Name: SpawnBulletPoint
   m_TagString: Untagged
@@ -48442,6 +48443,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3a536285a860249982a82944a2b27a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1771167812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771167809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94d3f084b6e8e84f8cf6961ad942c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 4236963435664722619, guid: f00248d9820ca9e4ca1491c42bb15960, type: 3}
+  poolSize: 15
+  spawnTransform: {fileID: 1771167810}
 --- !u!1001 &1773187667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55173,7 +55189,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2047298657}
   - component: {fileID: 2047298659}
-  - component: {fileID: 2047298658}
   - component: {fileID: 2047298660}
   m_Layer: 0
   m_Name: ADMIN
@@ -55197,21 +55212,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2047298658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047298656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f94d3f084b6e8e84f8cf6961ad942c6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 4236963435664722619, guid: f00248d9820ca9e4ca1491c42bb15960, type: 3}
-  poolSize: 15
-  spawnTransform: {fileID: 1771167810}
 --- !u!114 &2047298659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57955,7 +57955,7 @@ MonoBehaviour:
   health: 10
   canShoot: 0
   bulletPool: {fileID: 969085677}
-  timeToShoot: 1
+  timeToShoot: 1.5
   particleDestroy: {fileID: 160471040847743173, guid: 2e7ccf5bd8778c14cb4fb056ce4c8092, type: 3}
 --- !u!82 &919132148060054778
 AudioSource:
@@ -63390,6 +63390,7 @@ GameObject:
   - component: {fileID: 6177753701371478280}
   - component: {fileID: 6177753701371478282}
   - component: {fileID: 6177753701371478281}
+  - component: {fileID: 6177753701371478283}
   m_Layer: 6
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -63440,9 +63441,21 @@ MonoBehaviour:
   relativeFwd: {x: 0, y: 0, z: 1}
   speed: 20
   testConstraint: {x: 25, y: 25, z: 25}
-  bulletPool: {fileID: 2047298658}
+  bulletPool: {fileID: 1771167812}
   _canShoot: 1
 --- !u!114 &6177753701371478282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6177753701371478279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72f97a9498d2244dba6b934fafffd99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6177753701371478283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64018,8 +64031,6 @@ GameObject:
   - component: {fileID: 8006208352504576947}
   - component: {fileID: 6391768434597950486}
   - component: {fileID: 9174088418266906844}
-  - component: {fileID: 9174088418266906847}
-  - component: {fileID: 9174088418266906849}
   m_Layer: 6
   m_Name: Spaceship
   m_TagString: Untagged
@@ -65738,30 +65749,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &9174088418266906847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7228300214287507721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f72f97a9498d2244dba6b934fafffd99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &9174088418266906849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7228300214287507721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dc17e3d78e10fa4bbe711a99d10dc7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &9177329049448494674
 Transform:
   m_ObjectHideFlags: 0

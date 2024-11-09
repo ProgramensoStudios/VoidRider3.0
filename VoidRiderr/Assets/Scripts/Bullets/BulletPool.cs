@@ -6,7 +6,7 @@ public class BulletPool : MonoBehaviour
     public static BulletPool Instance;
 
     public GameObject bulletPrefab;
-    public int poolSize = 3;
+    public int poolSize = 10;
 
     private Queue<GameObject> _bulletPool = new Queue<GameObject>();
 
@@ -21,7 +21,6 @@ public class BulletPool : MonoBehaviour
     void Start()
     {
         
-        
         for (int i = 0; i < poolSize; i++)
         {
             GameObject bullet = Instantiate(bulletPrefab, spawnTransform);
@@ -35,6 +34,7 @@ public class BulletPool : MonoBehaviour
         if (_bulletPool.Count > 0)
         {
             GameObject bullet = _bulletPool.Dequeue();
+            bullet.transform.SetParent(gameObject.transform);
             bullet.SetActive(true);
             return bullet;
         }
@@ -43,17 +43,10 @@ public class BulletPool : MonoBehaviour
             Debug.Log("Sin Balas!");
             return null;
         }
-        // else
-        // {
-        //     // Si el pool está vacío, se puede crear una nueva bala (opcional)
-        //     GameObject bullet = Instantiate(bulletPrefab);
-        //     return bullet;
-        // }
     }
 
     public void ReturnBullet(GameObject bullet)
     {
-        Debug.Log("Bala regresando");
         bullet.SetActive(false);
         _bulletPool.Enqueue(bullet);
     }

@@ -5,6 +5,7 @@ public class ZoneHandler : MonoBehaviour
 {
     public GameObject[] enemiesInZone;
     public GameObject player;
+    private const int playerLayer = 6; // Define layer 6 as a constant
 
     private void GetTurretsShooting()
     {
@@ -17,6 +18,7 @@ public class ZoneHandler : MonoBehaviour
             enemy.Shoot();
         }
     }
+
     private void GetTurretsStopShooting()
     {
         for (var indexEnemies = 0; indexEnemies < enemiesInZone.Length; indexEnemies++)
@@ -28,22 +30,17 @@ public class ZoneHandler : MonoBehaviour
         }
     }
 
-    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer != 6) return;
-        {
-            GetTurretsShooting();
-            player = other.gameObject;
-        }
+        if (other.gameObject.layer != playerLayer) return; // Ensure only layer 6 GameObjects trigger the event
+        GetTurretsShooting();
+        player = other.gameObject;
     }
-    
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer != 6) return;
-        {
-            GetTurretsStopShooting();
-        }
+        if (other.gameObject.layer != playerLayer) return; // Ensure only layer 6 GameObjects trigger the event
+        GetTurretsStopShooting();
+        Debug.Log("Exiting Zone");
     }
 }
