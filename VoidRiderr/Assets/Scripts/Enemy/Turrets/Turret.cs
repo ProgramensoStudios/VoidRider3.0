@@ -26,6 +26,7 @@ public class Turret : Enemy
         {
             AudioManager.Instance.InstanceParticles(transform, particleDestroy);
             AudioManager.Instance.PlayAudio(audioSource);
+            gameObject.SetActive(false);
         }
     }
 }

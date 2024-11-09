@@ -53356,6 +53356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabToCreate: {fileID: 0}
+  maxPoolSize: 0
   createdObjects: []
 --- !u!1001 &2047385864
 PrefabInstance:

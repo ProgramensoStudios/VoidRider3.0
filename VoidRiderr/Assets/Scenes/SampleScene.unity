@@ -54323,6 +54323,7 @@ MonoBehaviour:
   canShoot: 0
   bulletPool: {fileID: 969085677}
   timeToShoot: 3
+  particleDestroy: {fileID: 0}
   yRot: {fileID: 8137071865361467527}
 --- !u!23 &1393131695836765828
 MeshRenderer:
