@@ -8,8 +8,6 @@ public class EnemyBullet : MonoBehaviour
     private Vector3 _originalPosition;
     [SerializeField] private float timeToDestroy;
     public int damage;
-    
-
 
     private IEnumerator DestroyBullets()
     {

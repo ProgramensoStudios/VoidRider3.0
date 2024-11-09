@@ -1,23 +1,14 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     private int _health = 20;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-       
+        int currentDamage = other.GetComponent<EnemyBullet>().damage;
+        _health -= currentDamage;
+        if (_health <= 0) SceneManager.LoadScene(0);
     }
 }
