@@ -9,7 +9,7 @@ public class FollowEnemyBullet : MonoBehaviour
    [SerializeField] private Transform _target;
    private Enemy _enemy;
 
-   [SerializeField] private int damage;
+   public int damage;
 
    [Tooltip("Capa Enemy: 7 Capa Player:6")]
    [SerializeField] private int layer;

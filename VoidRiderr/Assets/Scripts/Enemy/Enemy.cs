@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     public bool canShoot;
     [SerializeField] private PoolManager bulletPool;
     [SerializeField] private float timeToShoot;
+    [SerializeField] protected GameObject particleDestroy;
+    protected AudioSource audioSource;
 
     public virtual void TakeDamage(int damage)
     {
