@@ -40,10 +40,15 @@ public class BulletPool : MonoBehaviour
         }
         else
         {
-            // Si el pool está vacío, se puede crear una nueva bala (opcional)
-            GameObject bullet = Instantiate(bulletPrefab);
-            return bullet;
+            Debug.Log("Sin Balas! ");
+            return null;
         }
+        // else
+        // {
+        //     // Si el pool está vacío, se puede crear una nueva bala (opcional)
+        //     GameObject bullet = Instantiate(bulletPrefab);
+        //     return bullet;
+        // }
     }
 
     public void ReturnBullet(GameObject bullet)

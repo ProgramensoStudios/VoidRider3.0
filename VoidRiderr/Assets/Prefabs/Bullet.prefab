@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4613235771143244703}
   - component: {fileID: 625201153206404757}
   - component: {fileID: -6178372801643867486}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,9 +123,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9950a506330325b45b2541274417f8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 200
   detectionRadius: 10
   _target: {fileID: 0}
+  damage: 1
   layer: 7
   spawnPos: {fileID: 0}
 --- !u!114 &625201153206404757
@@ -140,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fd4a0bdd6c3cc44284909cfc5218e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDestroy: 2
+  timeToDestroy: 3
 --- !u!54 &-6178372801643867486
 Rigidbody:
   m_ObjectHideFlags: 0

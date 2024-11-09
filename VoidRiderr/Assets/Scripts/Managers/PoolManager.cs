@@ -4,26 +4,39 @@ using UnityEngine;
 public class PoolManager : MonoBehaviour
 {
     public GameObject prefabToCreate;
+    public int maxPoolSize;
     public List<GameObject> createdObjects;
 
     private void Start()
     {
-        createdObjects = new List<GameObject>();
-        
+        createdObjects = new List<GameObject>(maxPoolSize);
     }
 
-    public GameObject AskForObject(Vector3 posToSpawn)
+    public GameObject AskForObject(Transform posToSpawn)
     {
-        for (int indexObjects = 0;  indexObjects < createdObjects.Count; indexObjects++)
+        for (int i = 0; i < createdObjects.Count; i++)
         {
-            if (!createdObjects[indexObjects].activeInHierarchy)
+            if (!createdObjects[i].activeInHierarchy)
             {
-                createdObjects[indexObjects].SetActive(true);
-                return createdObjects[indexObjects];
+                createdObjects[i].transform.position = posToSpawn.position;
+                createdObjects[i].SetActive(true);
+                createdObjects[i].transform.parent = posToSpawn;
+                return createdObjects[i];
             }
         }
-        GameObject createdObject = Instantiate(prefabToCreate, posToSpawn, Quaternion.identity);
-        createdObjects.Add(createdObject);
-        return createdObject;
+        
+        if (createdObjects.Count < maxPoolSize)
+        {
+            GameObject createdObject = Instantiate(prefabToCreate, posToSpawn.position, Quaternion.identity);
+            createdObjects.Add(createdObject);
+            return createdObject;
+        }
+        return null;
+    }
+
+    public void ReturnObject(GameObject obj)
+    {
+        obj.SetActive(false);
+        obj.transform.position = Vector3.zero;
     }
 }

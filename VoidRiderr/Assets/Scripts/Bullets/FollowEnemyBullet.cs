@@ -7,6 +7,9 @@ public class FollowEnemyBullet : MonoBehaviour
     public float speed;
     public float detectionRadius; 
    [SerializeField] private Transform _target;
+   private Enemy _enemy;
+
+   [SerializeField] private int damage;
 
    [Tooltip("Capa Enemy: 7 Capa Player:6")]
    [SerializeField] private int layer;
@@ -15,20 +18,23 @@ public class FollowEnemyBullet : MonoBehaviour
     private Collider[] enemiesInRange = new Collider[10]; 
     private SpawnPosReference _spawnRef;
     [SerializeField] private Transform spawnPos;
+    private Transform parent;
 
     private void Awake()
     {
         _spawnRef = FindAnyObjectByType<SpawnPosReference>();
         spawnPos = _spawnRef.transform;
+        parent = transform.parent;
     }
 
     private void Update()
     {
         _target = FindClosestEnemy();
-        
+    
         if (_target != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, _target.position, speed * Time.deltaTime);
+        
             if (Vector3.Distance(transform.position, _target.position) < 0.1f)
             {
                 BulletPool.Instance.ReturnBullet(gameObject);
@@ -36,7 +42,8 @@ public class FollowEnemyBullet : MonoBehaviour
         }
         else
         {
-            transform.position += transform.forward * (speed* Time.deltaTime);
+            // Mueve el objeto hacia adelante de forma local
+            transform.localPosition += transform.localRotation * Vector3.forward * (speed * Time.deltaTime);
         }
     }
 
@@ -64,10 +71,10 @@ public class FollowEnemyBullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Layer 7 es Enemy!
-        if (other.gameObject.layer == layer)
-        {
-           // BulletPool.Instance.ReturnBullet(gameObject);
-        }
+        if (other.gameObject.layer != layer) return;
+       // BulletPool.Instance.ReturnBullet(gameObject);
+        _enemy = other.GetComponent<Enemy>();
+        _enemy.TakeDamage(damage);
     }
     
     private void OnDrawGizmosSelected()
@@ -80,6 +87,7 @@ public class FollowEnemyBullet : MonoBehaviour
     private void OnEnable()
     {
         transform.position = spawnPos.position;
+        transform.rotation = parent.parent.rotation;
     }
     
 }

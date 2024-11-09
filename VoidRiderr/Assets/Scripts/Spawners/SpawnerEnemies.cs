@@ -10,7 +10,7 @@ public class SpawnerEnemies : MonoBehaviour
         {
             for (int i = 0; i < spawners[indexSpawner].points.Length; i++)
             {
-                spawners[indexSpawner].enemyPool.AskForObject(spawners[indexSpawner].points[i].position);
+                spawners[indexSpawner].enemyPool.AskForObject(spawners[indexSpawner].points[i]);
             }
         }
     }
