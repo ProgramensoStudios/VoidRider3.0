@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class Turret : Enemy
@@ -26,7 +28,13 @@ public class Turret : Enemy
         {
             AudioManager.Instance.InstanceParticles(transform, particleDestroy);
             AudioManager.Instance.PlayAudio(audioSource);
-            gameObject.SetActive(false);
+            StartCoroutine(Delay());
         }
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        gameObject.SetActive(false);
     }
 }
