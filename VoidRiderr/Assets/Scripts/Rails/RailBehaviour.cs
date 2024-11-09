@@ -28,7 +28,7 @@ public class RailBehaviour : MonoBehaviour, IFollowPoints
     {
         float dist = Vector3.Distance(transformsToFollow.target.position, transform.position);
 
-        if (dist >= 0.1f)
+        if (dist >= 10f)
         {
             // Movimiento
             Vector3 direction = (transformsToFollow.target.position - transform.position).normalized;

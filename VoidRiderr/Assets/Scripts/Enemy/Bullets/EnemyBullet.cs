@@ -31,7 +31,7 @@ public class EnemyBullet : MonoBehaviour
         StartCoroutine(DestroyBullets());
     }
 
-   
+
 
     private void Update()
     {

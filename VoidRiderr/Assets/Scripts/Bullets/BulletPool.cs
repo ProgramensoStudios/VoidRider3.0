@@ -34,7 +34,6 @@ public class BulletPool : MonoBehaviour
         if (_bulletPool.Count > 0)
         {
             GameObject bullet = _bulletPool.Dequeue();
-            bullet.transform.SetParent(gameObject.transform);
             bullet.SetActive(true);
             return bullet;
         }

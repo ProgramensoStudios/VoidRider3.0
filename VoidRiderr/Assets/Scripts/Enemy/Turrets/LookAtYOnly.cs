@@ -5,7 +5,7 @@ public class LookAtYOnly : MonoBehaviour
 {
     public Transform target;
     public bool playerLocated;
-    public Vector3 lookRot;
+ 
 
     void Update()
     {
@@ -13,7 +13,7 @@ public class LookAtYOnly : MonoBehaviour
         // Calcula la dirección hacia el objetivo, ignorando la altura
         Vector3 direction = target.position - transform.localPosition;
         //sVector3 targetVector = new Vector3(0, direction.y, 0);
-        gameObject.transform.LookAt(target, lookRot);
+        gameObject.transform.LookAt(target, Vector3.up);
     }
 
     public void LookAt(Transform player)

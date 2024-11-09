@@ -73,7 +73,7 @@ public class DisplayInputData : MonoBehaviour
             if (rightTrigger > 0 && _canShoot)
             {
                 _canShoot = false;
-                var currentBullet = bulletPool.GetBullet();
+                var currentBullet = BulletPool.Instance.GetBullet();
                 currentBullet.transform.parent = null;
                 StartCoroutine(ReadyToShoot());
             }
