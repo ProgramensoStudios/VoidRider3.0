@@ -16,6 +16,6 @@ public class RotateWithHead : MonoBehaviour
 
         // Obtiene la rotación global de la cámara en los ejes X e Y, ignorando Z si no es necesario
         Vector3 targetRotation = mainCamera.transform.eulerAngles;
-        transform.rotation = Quaternion.Euler(targetRotation.x, targetRotation.y, 0); // Ignora Z o usa targetRotation.z si lo necesitas
+        transform.rotation = Quaternion.Euler(targetRotation.x, targetRotation.y, targetRotation.z);
     }
 }

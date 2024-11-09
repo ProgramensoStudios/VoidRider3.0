@@ -39,11 +39,10 @@ public class ZoneHandler : MonoBehaviour
     }
     
 
-    private void OnCollisionExit(Collision other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer != 6) return;
         {
-            
             GetTurretsStopShooting();
         }
     }
