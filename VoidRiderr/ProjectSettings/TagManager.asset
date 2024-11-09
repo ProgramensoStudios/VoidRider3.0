@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Anchor
   - Building
+  - Enemy
   layers:
   - Default
   - TransparentFX

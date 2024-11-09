@@ -10,7 +10,6 @@ public class DisplayInputData : MonoBehaviour
 {
     private InputData _inputData;
     [Header ("Nave Objects")]
-    [SerializeField] private GameObject nave;
     [SerializeField] private Rigidbody cabinRigidbody;
 
     

@@ -40,7 +40,7 @@ public class BulletPool : MonoBehaviour
         }
         else
         {
-            Debug.Log("Sin Balas! ");
+            Debug.Log("Sin Balas!");
             return null;
         }
         // else
