@@ -4,39 +4,34 @@ using UnityEngine;
 
 public class Turret : Enemy
 {
-    private bool isAlive = true;
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
-    }
-
-
+    private bool _isAlive = true;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 9)
-        {
-            int currentDamage = other.GetComponent<FollowEnemyBullet>().damage;
-            TakeDamage(currentDamage);
-            BulletPool.Instance.ReturnBullet(other.gameObject);
-            DestroyCompare();
-        }
+        if (other.gameObject.layer != 9) return;
+        var currentDamage = other.GetComponent<FollowEnemyBullet>().damage;
+        TakeDamage(currentDamage);
+        BulletPool.Instance.ReturnBullet(other.gameObject);
+        DestroyCompare();
     }
 
     private void DestroyCompare()
     {
-        if(health<=0 && isAlive)
-        {
-            canShoot = false;
-            AudioManager.Instance.InstanceParticles(this.transform, particleDestroy);
-            AudioManager.Instance.PlayAudio(audioSource);
-            isAlive = false;
-            StartCoroutine(Delay());
-        }
+        if (health > 0 || !_isAlive) return;
+        //canShoot = false;
+        AudioManager.Instance.InstanceParticles(transform, particleDestroy);
+        AudioManager.Instance.PlayAudio(audioSource);
+        _isAlive = false;
+        StartCoroutine(Delay());
     }
 
-    IEnumerator Delay()
+    private IEnumerator Delay()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        canShoot = false;
     }
 }

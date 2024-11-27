@@ -13,7 +13,7 @@ public class PoolManager : MonoBehaviour
         createdObjects = new List<GameObject>(maxPoolSize);
     }
 
-    public GameObject AskForObject(Transform posToSpawn)
+    public void AskForObject(Transform posToSpawn)
     {
         for (int i = 0; i < createdObjects.Count; i++)
         {
@@ -26,7 +26,7 @@ public class PoolManager : MonoBehaviour
 
                 // Luego activa el objeto
                 createdObjects[i].SetActive(true);
-                return createdObjects[i];
+                //return createdObjects[i];
             }
         }
     
@@ -38,10 +38,10 @@ public class PoolManager : MonoBehaviour
             StartCoroutine(Wait());
             createdObjects.Add(createdObject);
             createdObject.SetActive(true);
-            return createdObject;
+           // return createdObject;
         }
 
-        return null;
+       // return null;
     }
 
     private IEnumerator Wait()

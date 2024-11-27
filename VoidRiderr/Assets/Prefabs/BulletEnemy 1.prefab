@@ -164,5 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 120
-  timeToDestroy: 0
-  damage: 0
+  timeToDestroy: 5
+  damage: 1
+  yOffset: 5
+  target: {fileID: 0}
+  detectionRadius: 5

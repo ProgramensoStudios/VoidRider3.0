@@ -12,9 +12,9 @@ public class ZoneHandler : MonoBehaviour
         for (var indexEnemies = 0; indexEnemies < enemiesInZone.Length; indexEnemies++)
         {
             var enemy = enemiesInZone[indexEnemies].GetComponent<Turret>();
-            var yRot = enemiesInZone[indexEnemies].GetComponentInChildren<LookAtYOnly>();
-            yRot.LookAt(player.transform);
-            enemy.canShoot = true;
+           // var yRot = enemiesInZone[indexEnemies].GetComponentInChildren<LookAt>();
+           // yRot.LookAt(player.transform);
+            //enemy.canShoot = true;
             enemy.Shoot();
         }
     }
@@ -24,9 +24,9 @@ public class ZoneHandler : MonoBehaviour
         for (var indexEnemies = 0; indexEnemies < enemiesInZone.Length; indexEnemies++)
         {
             var enemy = enemiesInZone[indexEnemies].GetComponent<Turret>();
-            var yRot = enemiesInZone[indexEnemies].GetComponentInChildren<LookAtYOnly>();
-            yRot.StopLooking();
-            enemy.canShoot = false;
+           // var yRot = enemiesInZone[indexEnemies].GetComponentInChildren<LookAt>();
+           // yRot.StopLooking();
+            //enemy.canShoot = false;
         }
     }
 

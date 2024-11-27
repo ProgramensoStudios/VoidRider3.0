@@ -1,14 +1,21 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private int _health = 20;
+   [SerializeField] private int health;
 
     private void OnTriggerEnter(Collider other)
     {
-        int currentDamage = other.GetComponent<EnemyBullet>().damage;
-        _health -= currentDamage;
-        if (_health <= 0) SceneManager.LoadScene(0);
+        var currentDamage = other.GetComponent<EnemyBullet>();
+        if (currentDamage != null)
+        {
+            var damage = currentDamage.damage;
+            other.gameObject.SetActive(false);
+            health -= damage;
+        }
+        if (health <= 0) Debug.Log("<color=red>Muerte!</color>");
+        
     }
 }

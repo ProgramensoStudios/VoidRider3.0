@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        Shoot();
     }
 
     public virtual void TakeDamage(int damage)
@@ -29,9 +30,11 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator ShootCor()
     {
+        //Cambio de While canShoot a WhileTrue
         while (canShoot)
         {
             bulletPool.AskForObject(gameObject.transform.GetChild(0).GetChild(0));
+            
             yield return new WaitForSeconds(timeToShoot);
         }
     }
