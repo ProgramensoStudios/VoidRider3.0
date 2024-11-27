@@ -14,11 +14,12 @@ public class EnemyBullet : MonoBehaviour
     [SerializeField] private float detectionRadius;
     private Coroutine destroyCoroutine;
     private Coroutine detachCoroutine;
-
+    private Transform enemyParent;
     private void Awake()
     {
         _originalPosition = transform.localPosition;
         target = FindAnyObjectByType<DoorReference>().gameObject.transform;
+        enemyParent = FindAnyObjectByType<EnemyPoolRef>().gameObject.transform;
     }
 
     private void OnEnable()
@@ -90,11 +91,11 @@ public class EnemyBullet : MonoBehaviour
 
     private IEnumerator WaitToDetach()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         
         if (gameObject.activeInHierarchy)
         {
-            transform.parent = null;
+            transform.SetParent(enemyParent);
         }
     }
 
