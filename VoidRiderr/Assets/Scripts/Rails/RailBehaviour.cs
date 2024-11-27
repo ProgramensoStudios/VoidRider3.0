@@ -7,9 +7,7 @@ public class RailBehaviour : MonoBehaviour, IFollowPoints
     public TransformsToFollow transformsToFollow;
     [Header("Movement and Rotation Settings")]
     [SerializeField] private float speed;
-    [SerializeField] private float rotationSpeed;
-
-
+    
     private void Start()
     {
         GetNextPoint();
@@ -28,20 +26,14 @@ public class RailBehaviour : MonoBehaviour, IFollowPoints
     {
         float dist = Vector3.Distance(transformsToFollow.target.position, transform.position);
 
-        if (dist >= 10f)
+        if (dist >= 1f)
         {
             // Movimiento
-            Vector3 direction = (transformsToFollow.target.position - transform.position).normalized;
+            var direction = (transformsToFollow.target.position - transform.position).normalized;
             transform.position += speed * Time.deltaTime * direction;
-
-            // Rotación lenta
-            Quaternion targetRotation = transformsToFollow.target.rotation;
-        
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
         else
         {
-            Debug.Log("Getting Next Point");
             GetNextPoint();
         }
     }
