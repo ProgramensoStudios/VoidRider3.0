@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
             health -= damage;
             OnReceiveDamage?.Invoke(health);
         }
-        if (health <= 0) Debug.Log("<color=red>Muerte!</color>");
+        if (health <= 0) SceneManager.LoadScene("MuertePorSnuSnu");
         
     }
 }
