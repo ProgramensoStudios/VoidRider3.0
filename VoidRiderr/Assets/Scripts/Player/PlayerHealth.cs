@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
             other.gameObject.SetActive(false);
             health -= damage;
         }
-        if (health <= 0) Debug.Log("<color=red>Muerte!</color>");
+        if (health <= 0) SceneManager.LoadScene("MuertePorSnuSnu");
         
     }
 }
