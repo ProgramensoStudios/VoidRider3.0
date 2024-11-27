@@ -14,7 +14,6 @@ public class DisplayInputData : MonoBehaviour
 
     
     [Header ("Speed & Vectors 3")]
-   // [SerializeField] public float rotSpeed = 0.002f;
     [SerializeField] private Vector3 relativeFwd;
     [SerializeField] public float speed;
     [SerializeField] private Vector3 testConstraint;
@@ -22,32 +21,16 @@ public class DisplayInputData : MonoBehaviour
     [SerializeField] private BulletPool bulletPool;
 
     [SerializeField]private bool _canShoot;
-  // [SerializeField] Vector3 spinMovement;
+
 
     
     private void Start()
     {
         _inputData = GetComponent<InputData>();
-        //bulletPool = FindAnyObjectByType<BulletPool>();
     }
 
     private void Update()
     {
-        /*
-        // Rotation
-        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out var rightAxis))
-        {
-            spinMovement = new Vector3(rightAxis.y * rotSpeed * -1f * Time.deltaTime, rightAxis.x * rotSpeed * Time.deltaTime, 0);
-        }
-        
-        //rot
-        var newRot = transform.localEulerAngles + spinMovement;
-        newRot.x = Mathf.Clamp(newRot.x, -15, 15);
-        newRot.y = Mathf.Clamp(newRot.y, -15, 15);
-        newRot.z = 0;
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(newRot), Time.deltaTime * 5f);
-        */
-        
         //Movevent
         if (_inputData._leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out var leftAxis))
         {
@@ -63,7 +46,7 @@ public class DisplayInputData : MonoBehaviour
         //movement
         var vector = transform.localPosition;
         vector.x = Mathf.Clamp(vector.x, -testConstraint.x, testConstraint.x);
-        vector.y = Mathf.Clamp(vector.y, -testConstraint.y, testConstraint.y);
+        vector.y = Mathf.Clamp(vector.y,  0, testConstraint.y);
         vector.z = Mathf.Clamp(vector.z, -testConstraint.z, testConstraint.z);
         transform.localPosition = vector;
         
@@ -88,7 +71,7 @@ public class DisplayInputData : MonoBehaviour
     
     private void OnDrawGizmos()
     {
-        Gizmos.DrawCube(this.transform.parent.position, testConstraint);
+        Gizmos.DrawWireCube(transform.parent.position, testConstraint * 2);
     }
 
 }
