@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Turret : Enemy
 {
+    private bool isAlive = true;
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
@@ -23,17 +24,19 @@ public class Turret : Enemy
 
     private void DestroyCompare()
     {
-        if(health<=0)
+        if(health<=0 && isAlive)
         {
-            AudioManager.Instance.InstanceParticles(transform, particleDestroy);
+            canShoot = false;
+            AudioManager.Instance.InstanceParticles(this.transform, particleDestroy);
             AudioManager.Instance.PlayAudio(audioSource);
+            isAlive = false;
             StartCoroutine(Delay());
         }
     }
 
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
         gameObject.SetActive(false);
     }
 }

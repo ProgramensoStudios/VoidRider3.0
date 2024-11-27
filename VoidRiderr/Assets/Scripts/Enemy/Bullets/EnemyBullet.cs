@@ -17,6 +17,12 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnEnable()
     {
+        if (originalParent == null)
+        {
+            originalParent = transform.parent;
+            transform.SetParent(originalParent);
+            return;
+        }
         transform.SetParent(originalParent);
         transform.rotation = originalParent.rotation;
         transform.localPosition = _originalPosition;
@@ -25,23 +31,7 @@ public class EnemyBullet : MonoBehaviour
         StartCoroutine(DestroyBullets());
     }
 
-    private void OnDisable()
-    {
-        if (transform.parent != null)
-        {
-            originalParent = transform.parent;
-        }
 
-        if (originalParent == null)
-        {
-            Debug.Log("El objeto no tiene un parent asignado al habilitarse.");
-            return;
-        }
-        
-        transform.SetParent(originalParent);
-        transform.rotation = originalParent.rotation;
-        transform.localPosition = _originalPosition;
-    }
 
     private void Update()
     {
