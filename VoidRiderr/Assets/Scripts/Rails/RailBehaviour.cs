@@ -39,7 +39,7 @@ public class RailBehaviour : MonoBehaviour, IFollowPoints
     }
 
 
-    [System.Serializable]
+    [Serializable]
     public struct TransformsToFollow
     {
         public Transform[] points;

@@ -38,4 +38,9 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(timeToShoot);
         }
     }
+    
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
 }
