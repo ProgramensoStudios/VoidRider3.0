@@ -6,6 +6,9 @@ public class PlayerHealth : MonoBehaviour
 {
    [SerializeField] private int health;
 
+   public delegate void ReceiveDamage(int health);
+   public ReceiveDamage OnReceiveDamage;
+
     private void OnTriggerEnter(Collider other)
     {
         var currentDamage = other.GetComponent<HarmPlayer>();
@@ -14,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
             var damage = currentDamage.damage;
             other.gameObject.SetActive(false);
             health -= damage;
+            OnReceiveDamage?.Invoke(health);
         }
         if (health <= 0) SceneManager.LoadScene("MuertePorSnuSnu");
         
