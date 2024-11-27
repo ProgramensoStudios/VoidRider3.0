@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var currentDamage = other.GetComponent<EnemyBullet>();
+        var currentDamage = other.GetComponent<HarmPlayer>();
         if (currentDamage != null)
         {
             var damage = currentDamage.damage;

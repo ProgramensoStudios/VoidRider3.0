@@ -1,18 +1,21 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class FallingRocks : MonoBehaviour
 {
-   public Rigidbody[] rocksRb;
+   public GameObject[] rocks;
 
    private void OnTriggerEnter(Collider other)
    {
       if (other.gameObject.layer != 6) return;
-      for (var indexRocks = 0; indexRocks < rocksRb.Length; indexRocks++)
+      for (var indexRocks = 0; indexRocks < rocks.Length; indexRocks++)
       {
-         if (rocksRb[indexRocks] != null)
+         if (rocks[indexRocks] != null)
          {
-            rocksRb[indexRocks].useGravity = true;
+            rocks[indexRocks].SetActive(true);
+            var rocksRb = rocks[indexRocks].GetComponent<Rigidbody>();
+            rocksRb.useGravity = true;
          }
          else
          {
