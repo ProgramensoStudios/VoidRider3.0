@@ -8353,7 +8353,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You Die
+  m_text: You Win
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8362,8 +8362,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278650879
-  m_fontColor: {r: 1, g: 0.028301716, b: 0.028301716, a: 1}
+    rgba: 4278714122
+  m_fontColor: {r: 0.040459096, g: 1, b: 0.027450979, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8490,7 +8490,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 15c757facb0cf64468d04256b55c5815, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae83cf0b35458ec4b8f2bf28258a5917, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

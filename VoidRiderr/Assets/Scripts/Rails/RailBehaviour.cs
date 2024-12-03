@@ -1,27 +1,47 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Necesario para cambiar de escena
 using static Interfaces;
 
 public class RailBehaviour : MonoBehaviour, IFollowPoints
 {
     public TransformsToFollow transformsToFollow;
+
     [Header("Movement and Rotation Settings")]
     [SerializeField] public float speed;
-    
+
     private void Start()
     {
-        GetNextPoint();
+        if (transformsToFollow.points.Length > 0)
+        {
+            GetNextPoint();
+        }
+        else
+        {
+            Debug.LogError("El array de puntos está vacío.");
+        }
     }
+
     private void Update()
     {
-        MoveToNextPoint();  
+        if (transformsToFollow.index < transformsToFollow.points.Length)
+        {
+            MoveToNextPoint();
+        }
     }
+
     public virtual void GetNextPoint()
     {
-        transformsToFollow.target = transformsToFollow.points[transformsToFollow.index];
-        MoveToNextPoint();
-        transformsToFollow.index++;
+        if (transformsToFollow.index < transformsToFollow.points.Length)
+        {
+            transformsToFollow.target = transformsToFollow.points[transformsToFollow.index];
+        }
+        else
+        {
+            OnReachEndOfPoints();
+        }
     }
+
     public virtual void MoveToNextPoint()
     {
         float dist = Vector3.Distance(transformsToFollow.target.position, transform.position);
@@ -34,10 +54,15 @@ public class RailBehaviour : MonoBehaviour, IFollowPoints
         }
         else
         {
+            transformsToFollow.index++;
             GetNextPoint();
         }
     }
 
+    private void OnReachEndOfPoints()
+    {
+        SceneManager.LoadScene("WinScene"); 
+    }
 
     [Serializable]
     public struct TransformsToFollow
@@ -47,3 +72,4 @@ public class RailBehaviour : MonoBehaviour, IFollowPoints
         public int index;
     }
 }
+
