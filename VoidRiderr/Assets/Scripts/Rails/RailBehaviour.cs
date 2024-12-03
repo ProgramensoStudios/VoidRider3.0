@@ -6,7 +6,7 @@ public class RailBehaviour : MonoBehaviour, IFollowPoints
 {
     public TransformsToFollow transformsToFollow;
     [Header("Movement and Rotation Settings")]
-    [SerializeField] private float speed;
+    [SerializeField] public float speed;
     
     private void Start()
     {

@@ -17,9 +17,9 @@ public class DisplayInputData : MonoBehaviour
     [SerializeField] private Vector3 relativeFwd;
     [SerializeField] public float speed;
     [SerializeField] private Vector3 testConstraint;
-
+    [SerializeField] protected Transform spawnPos;
     [SerializeField] private BulletPool bulletPool;
-
+    [SerializeField] private RailBehaviour rails;
     [SerializeField]private bool _canShoot;
 
 
@@ -56,9 +56,23 @@ public class DisplayInputData : MonoBehaviour
             if (rightTrigger > 0 && _canShoot)
             {
                 _canShoot = false;
-                var currentBullet = BulletPool.Instance.GetBullet();
+                var currentBullet = BulletPool.Instance.GetBullet(BulletType.BulletOwner.Player, spawnPos);
                 currentBullet.transform.parent = null;
                 StartCoroutine(ReadyToShoot());
+            }
+        }
+
+        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.gripButton, out var rightGrip)
+            &&
+            (_inputData._leftController.TryGetFeatureValue(CommonUsages.gripButton, out var leftGrip)))
+        {
+            if (rightGrip && leftGrip)
+            {
+                rails.speed = 80;
+            }
+            else
+            {
+                rails.speed = 50;
             }
         }
     }

@@ -4,7 +4,6 @@ using UnityEngine;
 public class BulletPool : MonoBehaviour
 {
     public static BulletPool Instance;
-
     public GameObject bulletPrefab;
     public int poolSize = 10;
 
@@ -29,20 +28,30 @@ public class BulletPool : MonoBehaviour
         }
     }
     
-    public GameObject GetBullet()
+    public GameObject GetBullet(BulletType.BulletOwner type, Transform spawnTransform)
     {
-        if (_bulletPool.Count > 0)
+        if (type != BulletType.BulletOwner.Player)
         {
-            GameObject bullet = _bulletPool.Dequeue();
-            bullet.SetActive(true);
-            return bullet;
-        }
-        else
-        {
-            Debug.Log("Sin Balas!");
+            Debug.Log("Este pool solo permite balas del jugador.");
             return null;
         }
+
+        foreach (var bullet in _bulletPool)
+        {
+            BulletType bulletType = bullet.GetComponent<BulletType>();
+            if (bulletType.owner == type && !bullet.activeInHierarchy)
+            {
+                bullet.transform.position = spawnTransform.position;
+                bullet.transform.rotation = spawnTransform.rotation;
+                bullet.SetActive(true);
+                return bullet;
+            }
+        }
+
+        Debug.Log($"No hay balas disponibles para {type}.");
+        return null;
     }
+
 
     public void ReturnBullet(GameObject bullet)
     {

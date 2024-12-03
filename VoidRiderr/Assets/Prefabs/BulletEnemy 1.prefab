@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 882365638450393074}
   - component: {fileID: 6150633642349274006}
   - component: {fileID: 5522739405573518939}
+  - component: {fileID: -5083055951490243737}
   m_Layer: 0
   m_Name: BulletEnemy 1
   m_TagString: Untagged
@@ -169,7 +170,7 @@ MonoBehaviour:
   damage: 0
   yOffset: 5
   target: {fileID: 0}
-  detectionRadius: 5
+  detectionRadius: 10
 --- !u!114 &5522739405573518939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,3 +184,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+--- !u!114 &-5083055951490243737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2413519628240867985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30efd4beba6d0064db0e9a1eacb5979e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: 1

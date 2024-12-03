@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private PoolManager bulletPool;
     [SerializeField] private float timeToShoot;
     [SerializeField] protected GameObject particleDestroy;
+    [SerializeField] protected Transform spawnPos;
     protected AudioSource audioSource;
 
     private void Start()
@@ -25,7 +26,6 @@ public class Enemy : MonoBehaviour
     public void Shoot()
     {
         StartCoroutine(ShootCor());
-        Debug.Log(gameObject.transform.GetChild(0).name);
     }
 
     private IEnumerator ShootCor()
@@ -33,8 +33,7 @@ public class Enemy : MonoBehaviour
         //Cambio de While canShoot a WhileTrue
         while (canShoot)
         {
-            bulletPool.AskForObject(gameObject.transform.GetChild(0).GetChild(0));
-            
+            bulletPool.AskForObject(spawnPos);
             yield return new WaitForSeconds(timeToShoot);
         }
     }
