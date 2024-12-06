@@ -22,7 +22,7 @@ public class DisplayInputData : MonoBehaviour
     [SerializeField] private RailBehaviour rails;
     [SerializeField]private bool _canShoot;
 
-
+    Coroutine cor;
     
     private void Start()
     {
@@ -51,14 +51,22 @@ public class DisplayInputData : MonoBehaviour
         transform.localPosition = vector;
         
         //Shoot
-        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.trigger, out var rightTrigger))
+        if (_inputData._rightController.TryGetFeatureValue(CommonUsages.triggerButton, out var rightTrigger))
         {
-            if (rightTrigger > 0 && _canShoot)
+            if (rightTrigger && _canShoot)
             {
-                _canShoot = false;
-                var currentBullet = BulletPool.Instance.GetBullet(BulletType.BulletOwner.Player, spawnPos);
-                currentBullet.transform.parent = null;
-                StartCoroutine(ReadyToShoot());
+                if (_canShoot)
+                {
+                    _canShoot = false;
+                    var currentBullet = BulletPool.Instance.GetBullet(BulletType.BulletOwner.Player, spawnPos);
+                    currentBullet.transform.parent = null;
+                    if (cor != null) StopCoroutine(cor);
+                    cor = StartCoroutine(ReadyToShoot());
+                }
+                else
+                {
+                    Debug.Log("ESTO NO DEBERIA ESTAR PASANDO");
+                }
             }
         }
 
@@ -68,11 +76,11 @@ public class DisplayInputData : MonoBehaviour
         {
             if (rightGrip && leftGrip)
             {
-                rails.speed = 80;
+                rails.speed = 120;
             }
-            else
+            else if (!rightGrip && !leftGrip)
             {
-                rails.speed = 50;
+                rails.speed = 80;
             }
         }
     }

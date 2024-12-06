@@ -187,7 +187,7 @@ MonoBehaviour:
   health: 10
   canShoot: 1
   bulletPool: {fileID: 6394873241008935184}
-  timeToShoot: 2
+  timeToShoot: 1
   particleDestroy: {fileID: 160471040847743173, guid: 2e7ccf5bd8778c14cb4fb056ce4c8092, type: 3}
   spawnPos: {fileID: 3393863928446529033}
 --- !u!114 &1649719344399503568

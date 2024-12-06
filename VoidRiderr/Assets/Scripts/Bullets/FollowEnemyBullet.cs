@@ -9,7 +9,7 @@ public class FollowEnemyBullet : MonoBehaviour
     public float detectionRadius; 
    [SerializeField] private Transform _target;
    private Enemy _enemy;
-
+    [SerializeField] private ParticleSystem particles;
    public int damage;
 
    
@@ -73,9 +73,14 @@ public class FollowEnemyBullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Layer 7 es Enemy!
-        if (other.gameObject.layer != 7) return;
+        if (other.gameObject.layer != 7)
+        {
+            BulletPool.Instance.ReturnBullet(gameObject);
+            return;
+        } 
        // BulletPool.Instance.ReturnBullet(gameObject);
         _enemy = other.GetComponent<Enemy>();
+        if (_enemy == null) return;
         _enemy.TakeDamage(damage);
     }
     
@@ -90,6 +95,7 @@ public class FollowEnemyBullet : MonoBehaviour
     {
         transform.position = spawnPos.position;
         transform.rotation = spawnPos.rotation;
+        particles.Play();
     }
     
 }

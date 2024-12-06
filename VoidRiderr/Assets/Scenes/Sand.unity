@@ -2763,7 +2763,7 @@ MonoBehaviour:
     - {fileID: 558088152}
     target: {fileID: 0}
     index: 0
-  speed: 50
+  speed: 120
 --- !u!4 &301722514
 Transform:
   m_ObjectHideFlags: 0
@@ -2773,7 +2773,7 @@ Transform:
   m_GameObject: {fileID: 301722512}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 134.7, z: -1857.6}
+  m_LocalPosition: {x: 0, y: 226, z: -2648}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
